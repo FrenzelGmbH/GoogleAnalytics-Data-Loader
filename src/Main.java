@@ -3,6 +3,7 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.analytics.Analytics;
 import com.google.api.services.analytics.model.GaData;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,7 +19,10 @@ public static void main(String[] args) {
     	String sDate = "";
     	String eDate = "";
     	String sYear = "";
+    	int sMonth = 1;
+    	int eMonth = 12;
     	String eYear = "";
+    	String format = "csv";
     	String targetPath = "";
     	Boolean showAccountIds = false;
     	
@@ -56,6 +60,21 @@ public static void main(String[] args) {
         				case "-tp":
         					targetPath = args[k+1];
         					break;
+        				case "-f":
+        					if(args[k+1].equals("json")){
+        						format = "json";
+        					}
+        					break;
+        				case "-sm":
+        					if(Integer.valueOf(args[k+1].toString())>=1 && Integer.valueOf(args[k+1].toString())<=12){
+        						sMonth = Integer.valueOf(args[k+1]);
+        					}
+        					break;
+            			case "-em":
+        					if(Integer.valueOf(args[k+1].toString())>=1 && Integer.valueOf(args[k+1].toString())<=12){
+        						eMonth = Integer.valueOf(args[k+1]);
+        					}
+        					break;
             			}
         			}
     			}
@@ -82,7 +101,20 @@ public static void main(String[] args) {
         	for(GoogleAnalyticsId gid:GoogleAnalyticsId.ReadIdsFromXml(IDsXML)){
         		for(GoogleQuery gq:GoogleQuery.readQueriesFromXML(QueryXML)){
         			for(int i = Integer.parseInt(sYear);i<=Integer.parseInt(eYear);i++){
-        				for(int j = 1; j<=12;j++){
+        				int startMonth,endMonth,j =0;
+        				if(i == Integer.parseInt(sYear)){
+        					startMonth = sMonth;
+        				}else{
+        					startMonth = 1;
+        				}
+        				if(i == Integer.parseInt(eYear)){
+        					endMonth = eMonth;
+        				}else{
+        					endMonth = 12;
+        				}        				
+        				for(j = startMonth; j<=endMonth;j++){
+        					DecimalFormat decim = new DecimalFormat("00");
+        					String monthString = decim.format(j);
         					GaData gdata;
                 			List<GaData> pages = new ArrayList<GaData>();
                 			int startIndex = 1;
@@ -100,8 +132,11 @@ public static void main(String[] args) {
                 				counter++;
                 			}while(gdata.getNextLink() != null);
                 			
-                			Data.writeToCSV(pages,targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ i +"_"+ j +".csv");
-                			
+                			if(format=="json"){
+                				Data.writeToJSON(pages, targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ i +"_"+ monthString +".json");
+                			}else{
+                				Data.writeToCSV(pages,targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ i +"_"+ monthString +".csv");
+                			}               			
                 			System.out.println("-------");
         				}
         			}
@@ -139,6 +174,6 @@ public static void main(String[] args) {
       
     } catch (Exception e) {
       e.printStackTrace();
-    }
-  }  
+    }       
+}
 }

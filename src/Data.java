@@ -105,20 +105,50 @@ public class Data {
 	    	  i=0;      
 	          while(i<gQuery.getRows().size()){
 	        	  int j = 0;
-	        	  String zeile ="";
+	        	  String row ="";
 	        	  while(j<gQuery.getColumnHeaders().size()){
-	        		  zeile +=gQuery.getRows().get(i).get(j);
+	        		  row +=gQuery.getRows().get(i).get(j);
 	        		  if(j<gQuery.getColumnHeaders().size()-1){
-	        			  zeile+=";";
+	        			  row+=";";
 	        		  }
 	        		  j++;
 	        	  }
-	        	  writer.println(zeile);
+	        	  writer.println(row);
 	        	  i++;
 	          }
 	      }
 	      
 	      
 	      writer.close();
+	  }
+	  
+	  public static void writeToJSON(List<GaData> gQueryData, String fileName) throws FileNotFoundException, UnsupportedEncodingException{
+		  PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+		  int i,j = 0;
+		  
+		  writer.println("[");
+		  
+		  for(GaData gQuery:gQueryData){
+			  i = 0;
+			  while(i<gQuery.getRows().size()){
+				  j = 0;
+				  String row="{";
+				  while(j<gQuery.getColumnHeaders().size()){
+					  row+= "\""+gQuery.getColumnHeaders().get(j).getName() + "\": \"" + gQuery.getRows().get(i).get(j) + "\"";
+					  if(j<gQuery.getColumnHeaders().size()-1){
+						  row+=",";
+					  }
+					  j++;
+				  }
+				  row+="}";
+				  if(i<gQuery.getRows().size()-1){
+					  row+=",";
+				  }
+				  writer.println(row);
+				  i++;
+			  }
+		  }		  
+		  writer.println("]");
+		  writer.close();
 	  }
 }
