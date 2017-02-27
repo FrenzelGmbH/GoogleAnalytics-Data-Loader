@@ -81,6 +81,23 @@ public static void main(String[] args) {
     		}
     		k++;
     	}
+    	//Set default values
+    	if(sDate.equals("") && eDate.equals("")){
+    		if(sYear.equals("") && eYear.equals("")){
+    			//Date of last Month
+    			Calendar x = Calendar.getInstance();
+    			x.add(Calendar.MONTH, -1);
+    			
+    			sYear = Integer.toString(x.get(Calendar.YEAR));
+    			System.out.printf("startYear is set by default to %s%n", sYear);
+    			eYear = sYear;
+    			System.out.printf("endYear is set by default to %s%n", eYear);
+    			sMonth = x.get(Calendar.MONTH)+1;
+    			System.out.printf("startMonth is set by default to %s%n", sMonth);
+    			eMonth=sMonth;
+    			System.out.printf("endMonth is set by default to %s%n", eMonth);
+    		}
+    	}    	
     	
     	//Google Analytics Data:
     	String appName = "Google Analytics CSV Loader";
@@ -89,7 +106,7 @@ public static void main(String[] args) {
     	//load config.xml
     	Config localConfig = Config.ReadConfigFromXML(configXML);
     	
-        Analytics analytics = Data.initializeAnalytics(jsonFactory, localConfig.serviceAccount, localConfig.keyFilePath, appName);
+        Analytics analytics = Data.initializeAnalytics(jsonFactory, localConfig.getServiceAccount(), localConfig.getKeyFilePath(), appName);
     	
         if(showAccountIds){   
         	Data.printAccountInfos(analytics, Data.getAccounts(analytics));  
@@ -119,12 +136,12 @@ public static void main(String[] args) {
                 			List<GaData> pages = new ArrayList<GaData>();
                 			int startIndex = 1;
                 			do{
-                				gdata = Data.getQuery(analytics,gid.ID,Helper.getDateFormat(j, i), Helper.getLastDayOfMonthDate(j, i), gq, startIndex);
+                				gdata = Data.getQuery(analytics,gid.getID(),Helper.getDateFormat(j, i), Helper.getLastDayOfMonthDate(j, i), gq, startIndex);
                 				pages.add(gdata);
                 				
                 				System.out.println("Query Nr.: " + counter);
                 				System.out.println("Year: " + i +"; Month: " + j);
-                     			System.out.println(gid.ID + ":" +gid.ShortName +"->"+ gq.QueryName);
+                     			System.out.println(gid.getID() + ":" +gid.getShortName() +"->"+ gq.getQueryName());
                      			System.out.println("TotalResults: " + gdata.getTotalResults());
                      			System.out.println("CurrentResults: " + gdata.getRows().size());    				 
                 				startIndex += 10000;
@@ -133,9 +150,9 @@ public static void main(String[] args) {
                 			}while(gdata.getNextLink() != null);
                 			
                 			if(format=="json"){
-                				Data.writeToJSON(pages, targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ i +"_"+ monthString +".json");
+                				Data.writeToJSON(pages, targetPath +"/"+gid.getShortName()+"_"+gq.getQueryName()+"_"+ i +"_"+ monthString +".json");
                 			}else{
-                				Data.writeToCSV(pages,targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ i +"_"+ monthString +".csv");
+                				Data.writeToCSV(pages,targetPath +"/"+gid.getShortName() +"_"+gq.getQueryName()+"_"+ i +"_"+ monthString +".csv");
                 			}               			
                 			System.out.println("-------");
         				}
@@ -156,16 +173,16 @@ public static void main(String[] args) {
         			List<GaData> pages = new ArrayList<GaData>();
         			int startIndex = 1;
         			do{
-        				gdata = Data.getQuery(analytics,gid.ID,sDate, eDate, gq, startIndex);
+        				gdata = Data.getQuery(analytics,gid.getID(),sDate, eDate, gq, startIndex);
         				pages.add(gdata);
         				 
-             			System.out.println(gid.ID + ":" +gid.ShortName +"->"+ gq.QueryName);
+             			System.out.println(gid.getID() + ":" +gid.getShortName() +"->"+ gq.getQueryName());
              			System.out.println("TotalResults: " + gdata.getTotalResults());
              			System.out.println("CurrentResults: " + gdata.getRows().size());    				 
         				startIndex += 10000;
         			}while(gdata.getNextLink() != null);
         			
-        			Data.writeToCSV(pages,targetPath +"/"+gid.ShortName+"_"+gq.QueryName+"_"+ cal.get(Calendar.YEAR) +"_"+ (cal.get(Calendar.MONTH)+1) +".csv");
+        			Data.writeToCSV(pages,targetPath +"/"+gid.getShortName()+"_"+gq.getQueryName()+"_"+ cal.get(Calendar.YEAR) +"_"+ (cal.get(Calendar.MONTH)+1) +".csv");
         			
         			System.out.println("-------");
         		}

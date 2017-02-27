@@ -8,9 +8,26 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Config {
-	String keyFilePath;
-	String serviceAccount;
+	private String keyFilePath;
+	private String serviceAccount;
 	
+	
+	public String getKeyFilePath() {
+		return keyFilePath;
+	}
+
+	public void setKeyFilePath(String keyFilePath) {
+		this.keyFilePath = keyFilePath;
+	}
+
+	public String getServiceAccount() {
+		return serviceAccount;
+	}
+
+	public void setServiceAccount(String serviceAccount) {
+		this.serviceAccount = serviceAccount;
+	}
+
 	public Config(String keyFile, String serviceAccountEmail){
 		this.keyFilePath = keyFile;
 		this.serviceAccount = serviceAccountEmail;

@@ -12,13 +12,63 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class GoogleQuery {
-	public String QueryName;
-	public List<String> Metrics = new ArrayList<String>();
-	public List<String> Dimensions = new ArrayList<String>();
-	public Boolean DimensionFlag;
-	public Boolean SegmentFlag;
-	public String Segment;
+	private String QueryName;
+	private List<String> Metrics = new ArrayList<String>();
+	private List<String> Dimensions = new ArrayList<String>();
+	private Boolean DimensionFlag;
+	private Boolean SegmentFlag;
+	private String Segment;
 	
+	
+	
+	public String getQueryName() {
+		return QueryName;
+	}
+
+	public void setQueryName(String queryName) {
+		QueryName = queryName;
+	}
+
+	public List<String> getMetrics() {
+		return Metrics;
+	}
+
+	public void setMetrics(List<String> metrics) {
+		Metrics = metrics;
+	}
+
+	public List<String> getDimensions() {
+		return Dimensions;
+	}
+
+	public void setDimensions(List<String> dimensions) {
+		Dimensions = dimensions;
+	}
+
+	public Boolean getDimensionFlag() {
+		return DimensionFlag;
+	}
+
+	public void setDimensionFlag(Boolean dimensionFlag) {
+		DimensionFlag = dimensionFlag;
+	}
+
+	public Boolean getSegmentFlag() {
+		return SegmentFlag;
+	}
+
+	public void setSegmentFlag(Boolean segmentFlag) {
+		SegmentFlag = segmentFlag;
+	}
+
+	public String getSegment() {
+		return Segment;
+	}
+
+	public void setSegment(String segment) {
+		Segment = segment;
+	}
+
 	public GoogleQuery(String queryName, List<String> metrics, List<String> dimensions,Boolean dimensionFlag, String segment, Boolean segmentFlag){
 		this.QueryName = queryName;
 		this.Metrics = metrics;

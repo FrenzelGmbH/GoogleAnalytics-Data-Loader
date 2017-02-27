@@ -11,9 +11,26 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class GoogleAnalyticsId {
-	public String ID;
-	public String ShortName;
+	private String ID;
+	private String ShortName;
 	
+	
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
+	public String getShortName() {
+		return ShortName;
+	}
+
+	public void setShortName(String shortName) {
+		ShortName = shortName;
+	}
+
 	public GoogleAnalyticsId(String id, String shortName){
 		this.ID = id;
 		this.ShortName = shortName;

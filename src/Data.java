@@ -64,26 +64,26 @@ public class Data {
 	  public static GaData getQuery(Analytics analytics, String profileId,String startDate, String endDate, GoogleQuery query, int startIndex) throws IOException {
 		  	String metricString = "";
 		  	String dimensionString = "";
-		  	for(String x:query.Metrics){
+		  	for(String x:query.getMetrics()){
 		  		metricString+=x+",";
 		  	}
 		  	metricString = metricString.substring(0,metricString.length()-1);
 		  	
-		  	if(query.DimensionFlag){
-			  	for(String y:query.Dimensions){
+		  	if(query.getDimensionFlag()){
+			  	for(String y:query.getDimensions()){
 			  		dimensionString +=y+",";
 			  	}
 			  	dimensionString = dimensionString.substring(0,dimensionString.length()-1);
 		  	}	  	
 		  	
-		  	if(!query.DimensionFlag && !query.SegmentFlag){
+		  	if(!query.getDimensionFlag() && !query.getSegmentFlag()){
 		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setMaxResults(10000).setStartIndex(startIndex).execute();
-		  	}else if(!query.DimensionFlag && query.SegmentFlag){
-		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setSegment(query.Segment).setMaxResults(10000).setStartIndex(startIndex).execute();
-		  	}else if(query.DimensionFlag && !query.SegmentFlag){
+		  	}else if(!query.getDimensionFlag() && query.getSegmentFlag()){
+		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setSegment(query.getSegment()).setMaxResults(10000).setStartIndex(startIndex).execute();
+		  	}else if(query.getDimensionFlag() && !query.getSegmentFlag()){
 		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setDimensions(dimensionString).setMaxResults(10000).setStartIndex(startIndex).execute();
 		  	}else{
-		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setDimensions(dimensionString).setSegment(query.Segment).setMaxResults(10000).setStartIndex(startIndex).execute();
+		  		return analytics.data().ga().get(profileId, startDate, endDate, metricString).setDimensions(dimensionString).setSegment(query.getSegment()).setMaxResults(10000).setStartIndex(startIndex).execute();
 		  	}
 		  }
 
