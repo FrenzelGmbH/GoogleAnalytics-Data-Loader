@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<GoogleIDs>
+  <GoogleID>
+    <Id>ga:12345678</Id>
+    <ShortName>AT</ShortName>
+  </GoogleID>
+  <GoogleID>
+    <Id>ga:23456789</Id>
+    <ShortName>CH</ShortName>
+  </GoogleID>
+  <GoogleID>
+    <Id>ga:34567890</Id>
+    <ShortName>DE</ShortName>
+  </GoogleID>
+</GoogleIDs>

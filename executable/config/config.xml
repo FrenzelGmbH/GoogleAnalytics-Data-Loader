@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Config>
+  <ServiceAccount>xyz@asdf.gserviceaccount.com</ServiceAccount>
+  <KeyFilePath>config/myacccredentials.p12</KeyFilePath>
+</Config>

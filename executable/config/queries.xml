@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Queries>
+  <Query name="newUsersComplex">
+    <Metrics>ga:newUsers</Metrics>
+    <Dimensions>ga:medium, ga:adContent, ga:deviceCategory, ga:region, ga:hostname, ga:pagePath, ga:date</Dimensions>
+    <DimensionFlag>True</DimensionFlag>
+    <Segment></Segment>
+    <SegmentFlag>False</SegmentFlag>
+  </Query>
+  <Query name="goalCompletionsSimple">
+    <Metrics>ga:goalCompletionsAll</Metrics>
+    <Dimensions>ga:medium, ga:deviceCategory, ga:hostname, ga:date</Dimensions>
+    <DimensionFlag>True</DimensionFlag>
+    <Segment></Segment>
+    <SegmentFlag>False</SegmentFlag>
+  </Query>
+</Queries>
