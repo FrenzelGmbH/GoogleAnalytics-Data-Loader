@@ -37,12 +37,12 @@ googleIDs.xml
 queries.xml:
 
 ![queries_xml](images/queries.png)
-    - Query name: the filename of the query
-    - Metrics: all metrics (seperated by ',') 
-    - Dimensions: all dimensions (seperated by ',')
-    - DimensionFlag: "True" or "False" depending on whether you used Dimensions or not.
-    - Segment: all applied segments here
-    - SegmentFlag: "True" or "False" depending on whether you used a Segment or not.
+- Query name: the filename of the query
+- Metrics: all metrics (seperated by ',') 
+- Dimensions: all dimensions (seperated by ',')
+- DimensionFlag: "True" or "False" depending on whether you used Dimensions or not.
+- Segment: all applied segments here
+- SegmentFlag: "True" or "False" depending on whether you used a Segment or not.
 
 # How can I make use of this?
 Everything you need is within the "executable" folder. You just need to adapt it according
@@ -51,17 +51,17 @@ to me when you want to automate processese, but feel free to to commit a UI ;)
 you execute this via: java -jar {pathToYourJar} {inputParameters}
 
 possible parameters: 
-    -q : Path to your queries.xml
-    -i : Path to your GoogleIDs.xml
-    -c : Path to your config.xml
-    -sd : start date (format: YYYY-MM-DD)
-    -ed : end date (format: YYYY-MM-DD)
-    -sy : start year (format: YYYY)
-    -ey : end year (format: YYYY)
-    -tp : path were the exported files will be saved
-    -f : format (csv or json / default is csv)
-    -sm : start month
-    -em : end month
+- q : Path to your queries.xml
+- i : Path to your GoogleIDs.xml
+- c : Path to your config.xml
+- sd : start date (format: YYYY-MM-DD)
+- ed : end date (format: YYYY-MM-DD)
+- sy : start year (format: YYYY)
+- ey : end year (format: YYYY)
+- tp : path were the exported files will be saved
+- f : format (csv or json / default is csv)
+- sm : start month
+- em : end month
 
 Basically you loop through your time period in monthly steps, except when you define start date and end date. 
 Then you get the stacked data for this period. (just one csv).
