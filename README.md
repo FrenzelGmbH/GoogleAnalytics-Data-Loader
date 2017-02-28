@@ -25,14 +25,14 @@ Examples:
 
 config.xml:
 ![config_xml](images/config.png)
-    - ServiceAccount: mail of your service account (probably something cryptic)
-    - KeyFilePath: path to your .p12 file (path needs to be relative to your .jar file!!)
+- ServiceAccount: mail of your service account (probably something cryptic)
+- KeyFilePath: path to your .p12 file (path needs to be relative to your .jar file!!)
 
 googleIDs.xml
 
-![googleids_xml](images/google.png)
-    - Id: Google Analytics ID
-    - ShortName: Will be the prefix of your result for this analytics id
+![googleids_xml](images/googleids.png)
+- Id: Google Analytics ID
+- ShortName: Will be the prefix of your result for this analytics id
 
 queries.xml:
 
